@@ -3,10 +3,9 @@ import { TrackList } from "./TrackList"
 import { TrackDetail } from "./TrackDetail"
 
 export function MainPage() {
-  const [trackId, setTrackId] = useState(null)
+  const [trackId, setTrackId] = useState<string| null>(null)
   
   return (
-    <>
       <div style={{ display: "flex" }}>
         <TrackList
           selectedTrackId={trackId}
@@ -14,6 +13,5 @@ export function MainPage() {
         />
         <TrackDetail  selectedTrackId={trackId} />
       </div>
-    </>
   )
 }
