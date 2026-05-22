@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react"
+import { getTrack } from "../../DAL/api-fake"
+import type { SelectedTrackType, ApiResponse } from "../../DAL/api"
+// import { getTrack } from "../DAL/api"
 
-type ApiResponse = {
-  data: SelectedTrackType
-}
+
 type TrackDetailProps = {
   selectedTrackId: string | null
 }
-type SelectedTrackType = {
-  id: string
-  attributes: Attributes
-}
-type Attributes = {
-  title: string
-  lyrics: string
-}
+// type SelectedTrackType = {
+//   id: string
+//   attributes: Attributes
+// }
+// type Attributes = {
+//   title: string
+//   lyrics: string
+// }
 
 export function TrackDetail({selectedTrackId}: TrackDetailProps) {
   const [selectedTrack, setSelectedTrack] = useState<SelectedTrackType|null>(null)
@@ -30,15 +31,8 @@ export function TrackDetail({selectedTrackId}: TrackDetailProps) {
       setIsLoading(true)
       setError(null)
 
-      fetch("https://musicfun.it-incubator.app/api/1.0/playlists/tracks/"+selectedTrackId, 
-        {
-          headers: {
-            "api-key": "eb364bcf-e657-4f9e-b048-9cd0cb4d9758"
-          }
-        }
-      )
-      .then(response =>  response.json())
-      .then((json:ApiResponse) => {setSelectedTrack(json.data)})
+      getTrack(selectedTrackId)
+      .then((json: ApiResponse) => {setSelectedTrack(json.data)})
       .catch((error: Error)=>{setError(error.message)})
       .finally(() => {setIsLoading(false)})
     }, [selectedTrackId])

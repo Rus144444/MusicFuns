@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { MainPage } from './components/MainPage.tsx'
+import { MainPage } from './components/UI/MainPage.tsx'
 import './index.css'
 
 
