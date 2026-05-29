@@ -1,19 +1,11 @@
+import {type PlaylistListItemResource} from "../DAL/api"
+
 type TrackItemProps = {
-    track: PlaylistItemResource
+    track: PlaylistListItemResource
     selectedTrackId: string | null
     onSelect: (id: string) => void
 }
-type PlaylistItemResource = {
-    id: string
-    attributes: PlaylistListItemAttributes
-}
-type PlaylistListItemAttributes = {
-    title: string
-    attachments: Attachment[]
-}
-type Attachment = {
-    url: string
-}
+
 export function TrackItem({track, selectedTrackId, onSelect}: TrackItemProps){
     return (
             <li

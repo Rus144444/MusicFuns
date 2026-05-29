@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react"
+import { useTracks } from "../BLL/useTracks"
 import { PageTitle } from "./PageTitle"
 import { TrackItem } from "./TrackItem"
-import { getTracks } from "../../DAL/api-fake"
-import type {GetPlaylistsOutput, PlaylistListItemResource} from "../../DAL/api"
 
 type TrackListProps = {
   selectedTrackId: string | null
@@ -10,19 +8,11 @@ type TrackListProps = {
 }
 
 export function TrackList({onTrackSelected, selectedTrackId}: TrackListProps) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [tracks, setTracks] = useState<PlaylistListItemResource[]>([])
-    useEffect(() => {
-      setIsLoading(true)
-      getTracks()
-      .then((json: GetPlaylistsOutput) => {
-        setTracks(json.data)})
-      .catch((error: Error)=>{setError(error.message)})
-      .finally(() => {setIsLoading(false)})
-      }, [])
-    if (isLoading) {return <div><PageTitle/>Loading...</div>}
-    if (error) {return <div><PageTitle/>{error}</div>}
+  const {tracks, isLoading, error} = useTracks()
+
+  if (isLoading) {return <div><PageTitle/>Loading...</div>}
+  if (error) {return <div><PageTitle/>{error}</div>}
+  
   return (
       <div >
         <div>
