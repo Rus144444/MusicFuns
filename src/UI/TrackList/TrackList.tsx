@@ -1,6 +1,8 @@
-import { useTracks } from "../BLL/useTracks"
-import { PageTitle } from "./PageTitle"
-import { TrackItem } from "./TrackItem"
+import { clsx } from "clsx"
+import { useTracks } from "../../BLL/useTracks"
+import { PageTitle } from "../PageTitle/PageTitle"
+import { TrackItem } from "../TrackItem/TrackItem"
+import css from "./TrackList.module.css"
 
 type TrackListProps = {
   selectedTrackId: string | null
@@ -10,11 +12,19 @@ type TrackListProps = {
 export function TrackList({onTrackSelected, selectedTrackId}: TrackListProps) {
   const {tracks, isLoading, error} = useTracks()
 
+  const classNameBlock = clsx({
+        [css.block]: true
+  })
+
+  const classNameList = clsx({
+        [css.list]: true
+  })
+
   if (isLoading) {return <div><PageTitle/>Loading...</div>}
   if (error) {return <div><PageTitle/>{error}</div>}
   
   return (
-      <div >
+      <div className={classNameBlock}>
         <div>
           <PageTitle/>
           <button
@@ -23,8 +33,8 @@ export function TrackList({onTrackSelected, selectedTrackId}: TrackListProps) {
             reset selection
           </button>
         </div>
-        <div style={{"display": "flex", "gap": "50px"}}>
-          <ul style={{"listStyle": "none"}}>
+        <div>
+          <ul className={classNameList}>
               {tracks.length === 0 &&  <div><PageTitle/><span>No tracks</span></div> }
               {tracks.map((track) => {
               return (

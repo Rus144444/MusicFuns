@@ -1,4 +1,4 @@
-import {useTrackSelection} from "../BLL/useTrackSelection"
+import {useTrackSelection} from "../../BLL/useTrackSelection"
 
 type TrackDetailProps = {
   selectedTrackId: string | null

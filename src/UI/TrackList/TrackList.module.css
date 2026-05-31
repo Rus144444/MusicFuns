@@ -1,0 +1,9 @@
+.block {
+    display: flex;
+    gap: 50px
+}
+
+.list {
+    list-style: none
+}
+
